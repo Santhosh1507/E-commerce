@@ -116,7 +116,7 @@ const Navbar = ({ handleOrderPopup }) => {
               </button>
               </div>
             </div>
-            <div className="hidden lg:block">
+            <div className="">
               <DarkMode />
             </div>
             <button
