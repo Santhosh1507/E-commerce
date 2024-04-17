@@ -3,21 +3,24 @@ import Loginnavbar from './Loginnavbar'
 import { useNavigate } from "react-router-dom";
 
 const Loginpage = () => {
-  const navigate = useNavigate();
-  const [username, setusername] = useState("");
-  const [password, setpassword] = useState("");
-  const [authenticated, setauthenticated] = useState(
-    localStorage.getItem(localStorage.getItem("authenticated") || false)
-  );
-  const users = [{ username: "san", password: "san2002" }];
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const account = users.find((user) => user.username === username);
-    if (account && account.password === password) {
-      localStorage.setItem("authenticated", true);
-      navigate("/allpage");
-    }
-  };
+    const navigate = useNavigate();
+    const [username, setusername] = useState("");
+    const [password, setpassword] = useState("");
+    const [authenticated, setAuthenticated] = useState(
+        localStorage.getItem(localStorage.getItem("authenticated") || false)
+    );
+    const users = [{ username: "mce", password: "mce2024" }];
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const account = users.find((user) => user.username === username);
+        if (account && account.password === password) {
+            localStorage.setItem("authenticated", true);
+            setAuthenticated(true);
+            navigate("/allpage");
+        } else {
+            alert('Invalid username or password');
+        }
+    };
     return (
         <div className="bg-slate-800 h-screen">
             <Loginnavbar />
