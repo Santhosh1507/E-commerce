@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import Logo from "../../assets/logo.png";
 import { IoMdSearch } from "react-icons/io";
 import { FaCartShopping } from "react-icons/fa6";
 import DarkMode from "./DarkMode";
-import { Link, useNavigate  } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Menu = [
   {
@@ -52,6 +52,10 @@ const DropdownLinks = [
 ];
 
 const Navbar = ({ handleOrderPopup }) => {
+  const [open, setOpen] = useState(0);
+  const menuClick = () => {
+    setOpen(!open)
+  }
   const navigate = useNavigate();
   const handleLogout = () => {
     localStorage.clear();
@@ -68,61 +72,65 @@ const Navbar = ({ handleOrderPopup }) => {
               Shoping
             </a>
           </div>
-          <div data-aos="zoom-in" className="flex justify-center">
-            <ul className="sm:flex hidden items-center gap-4">
-              {Menu.map((data) => (
-                <li key={data.id}>
-                  <a
-                    href={data.link}
-                    className="inline-block px-4 hover:text-primary duration-200"
-                  >
-                    {data.name}
-                  </a>
-                </li>
-              ))}
-              {/* Simple Dropdown and Links */}
-              <li>
-                <button
-                  className="bg-gradient-to-r from-primary to-secondary transition-all duration-200 text-white  py-1 px-4 rounded-full flex items-center gap-3 group"
-                  onClick={handleLogout}
-                >
-                <Link to="/" className=" decoration-none">Logout</Link>
-                
-                </button>
-              </li>
-            </ul>
-          </div>
+          
+          <div className="hidden lg:block">
+            <div data-aos="zoom-in" className="flex justify-center " >
+              <ul className="sm:flex items-center gap-4">
+                {Menu.map((data) => (
+                  <li key={data.id}>
+                    <a
+                      href={data.link}
+                      className="inline-block px-4 hover:text-primary duration-200"
+                    >
+                      {data.name}
+                    </a>
+                  </li>
+                ))}
+                {/* Simple Dropdown and Links */}
 
-          {/* search bar */}
-          <div className="flex justify-between items-center gap-4">
-            <div className="relative group hidden sm:block">
-              <input
-                type="text"
-                placeholder="search"
-                className="w-[200px] sm:w-[200px] group-hover:w-[300px] transition-all duration-300 rounded-full border border-gray-300 px-2 py-1 focus:outline-none focus:border-1 focus:border-primary dark:border-gray-500 dark:bg-gray-800  "
-              />
-              <IoMdSearch className="text-gray-500 group-hover:text-primary absolute top-1/2 -translate-y-1/2 right-3" />
+              </ul>
+            </div>
             </div>
 
-            {/* order button */}
-            <button
-              onClick={() => handleOrderPopup()}
-              className="bg-gradient-to-r from-primary to-secondary transition-all duration-200 text-white  py-1 px-4 rounded-full flex items-center gap-3 group"
-            >
-              <span className="group-hover:block hidden transition-all duration-200">
-                Order
-              </span>
-              <FaCartShopping className="text-xl text-white drop-shadow-sm cursor-pointer" />
-            </button>
+            {/* search bar */}
+            <div className="flex justify-between items-center gap-4 ">
+              <div className="relative group hidden lg:block">
+                <input
+                  type="text"
+                  placeholder="search"
+                  className="w-[200px] sm:w-[200px] transition-all duration-300 rounded-full border border-gray-300 px-2 py-1 focus:outline-none focus:border-1 focus:border-primary dark:border-gray-500 dark:bg-gray-800  "
+                />
+                <IoMdSearch className="text-gray-500 group-hover:text-primary absolute top-1/2 -translate-y-1/2 right-3" />
+              </div>
 
-            {/* Darkmode Switch */}
-            <div>
+              {/* order button */}
+              <div className="hidden lg:block">
+              <button
+                onClick={() => handleOrderPopup()}
+                className=" bg-gradient-to-r from-primary to-secondary transition-all duration-200 text-white  py-1 px-4 rounded-full flex items-center gap-3 group"
+              >
+                <span className="">
+                  Order
+                </span>
+                <FaCartShopping className="text-xl text-white drop-shadow-sm cursor-pointer" />
+              </button>
+              </div>
+            </div>
+            <div className="hidden lg:block">
               <DarkMode />
             </div>
+            <button
+              className="bg-gradient-to-r from-primary to-secondary transition-all duration-200 text-white  py-1 px-4 rounded-full flex items-center gap-3 group"
+              onClick={handleLogout}
+            >
+              Logout
+
+            </button>
           </div>
+          {/* Darkmode Switch */}
+          
         </div>
       </div>
-    </div>
   );
 };
 
