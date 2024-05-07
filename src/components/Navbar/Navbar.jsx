@@ -54,7 +54,7 @@ const DropdownLinks = [
 const Navbar = ({ handleOrderPopup }) => {
   const [open, setOpen] = useState(0);
   const menuClick = () => {
-    setOpen(!open)
+    setOpen(!open); 
   }
   const navigate = useNavigate();
   const handleLogout = () => {
